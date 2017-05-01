@@ -1,27 +1,52 @@
 @extends('layouts.layout')
 
+@section('title', 'Homepage')
+
 @section('content')
-    <div class="container">
-        <br>
+    <div class="jumbotron">
+        <p class="lead">
+            @if (session('nama'))
+                Welcome Back, {{ session('nama') }}
+            @else
+                Hello, Welcome to Our Blog
+            @endif
+        </p>
+    </div>
 
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <a href="/tambah" class="btn btn-info">Tambah Blog Baru</a>
-            </div>
-            
-            <div class="panel-body">
-                <?php $x = 1; ?>
-                @foreach ($data as $row)
-                    <h4><a href="/{{ $row->id }}">{{ $x++ }}.&nbsp;{{ $row->judul }}</a></h4>
-                    {{ substr($row->isi, 0, 200) }} ...
+    <div class="row marketing">
+        <div class="col-md-9">
+            @foreach ($data as $row)
+                @foreach ($users as $user)
+                    @if ($user->id == $row->author)
+                        <h4><a href="/{{ $row->id }}">{{ $row->judul }}</a></h4>
+                        <p style="font-size: 0.85em">
+                            @if ($user->level == 0)
+                                <span class="label label-danger">{{ $user->name }}</span>
+                            @else
+                                <span class="label label-success">{{ $user->name }}</span>
+                            @endif
 
-                    <a href="/{{ $row->id }}">Baca seterusnya</a><br><br>
-
-                    <a href="/{{ $row->id }}/edit" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="/{{ $row->id }}/hapus" class="btn btn-sm btn-danger">Hapus</a>
-                    <br><br>
+                            @if ($row->updated_at == '')
+                                <span style="color: #999;">&nbsp;{{ $row->created_at }}</span>
+                            @else
+                                <span style="color: #999;">&nbsp;{{ $row->updated_at }}</span>
+                            @endif
+                        </p>
+                        <p>{{ str_limit($row->isi, 150) }}</p>
+                    @endif
                 @endforeach
-            </div>
+            @endforeach
+        </div>
+        <div class="col-md-3">
+          @if (session('nama'))
+              <h4>Tags</h4>
+              @if (url()->current() != url(''))
+                  <p><a href="/">Clear</a></p>
+              @endif
+              @foreach ($tags as $tag)
+                    <p><a href="/tags/{{ $tag->id }}">{{ $tag->tag }}</a></p>
+              @endforeach
+          @endif
         </div>
     </div>
 @endsection

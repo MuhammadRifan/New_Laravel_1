@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <form action="/delete/{{ $data->id }}" method="post" class="form-inline">
-            Are you sure to delete this "{{ $data->judul }}" ?
+        <form action="/tag-delete/{{ $data->id }}" method="post" class="form-inline">
+            Are you sure to delete this "{{ $data->tag }}" tag ?
             <hr>
 
             <div class="form-group">

@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title', 'Create a Blog')
+@section('title', 'Add New Tag')
 
 @section('content')
     <div class="container">
@@ -14,18 +14,17 @@
             </ul>
         @endif
 
-        <form action="/add" method="post">
-            <div class="form-group">
-                <label>Title</label>
-                <input type="name" name="judul" class="form-control" autofocus>
-            </div>
+        <form action="/newtag" method="post" class="form-horizontal">
+          <div class="form-group">
+              <label class="col-sm-2 control-label">New Tag</label>
+              <div class="col-sm-10">
+                <input type="text" name="tag" class="form-control" autofocus>
+              </div>
+          </div>
 
-            <div class="form-group">
-                <label>Content Blog</label>
-                <textarea type="text" name="isi" rows="25" cols="150" style="resize: vertical;" class="form-control"></textarea>
-            </div>
+          <div class="col-sm-2"></div>
 
-            <input type="submit" name="submit" value="Tambah" class="btn btn-primary">
+            <input type="submit" name="submit" value="Add New" class="btn btn-primary">
 
             <!-- Harus ada bro -->
             {{ csrf_field() }}

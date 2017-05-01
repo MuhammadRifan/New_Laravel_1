@@ -1,9 +1,9 @@
 @extends('layouts.layout')
 
 @section('content')
-    <div class="container">
-        <form action="/delete/{{ $data->id }}" method="post" class="form-inline">
-            Are you sure to delete this "{{ $data->judul }}" ?
+    <div class="container">        
+        <form action="/delprof/{{ $data->id }}" method="post" class="form-inline">
+            Are you sure to delete this "{{ $data->name }}" user ?
             <hr>
 
             <div class="form-group">
@@ -11,7 +11,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" name="submit" value="No" class="form-control btn btn-warning">
+                <input type="submit" name="submit" value="No" class="form-control btn btn-primary">
             </div>
 
             <!-- Harus ada bro -->

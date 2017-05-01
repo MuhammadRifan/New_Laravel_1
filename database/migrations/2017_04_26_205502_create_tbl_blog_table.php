@@ -17,6 +17,9 @@ class CreateTblBlogTable extends Migration
           $table->increments('id');
           $table->char('judul', 255);
           $table->text('isi');
+          $table->timestamps();
+          $table->integer('author');
+          $table->integer('tags');
       });
     }
 
@@ -27,6 +30,6 @@ class CreateTblBlogTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tbl_blog');
     }
 }
